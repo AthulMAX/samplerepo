@@ -1,11 +1,17 @@
-FROM nginx:latest
+# Use an official base image
+FROM python:3.9-slim
 
-# Copy your web app content to the default Nginx directory
-COPY webapp.html /usr/share/nginx/html/index.html
+# Set the working directory
+WORKDIR /app
 
-# Expose the port the app will run on
+# Copy the application code
+COPY ./app /app
+
+# Install dependencies
+RUN pip install -r requirements.txt
+
+# Expose the application port
 EXPOSE 80
 
-# Start Nginx when the container starts
-CMD ["nginx", "-g", "daemon off;"]
-
+# Run the application
+CMD ["python", "app.py"]
