@@ -162,3 +162,56 @@ docker ps
 cd --
 whoami
 ssh -i ~/.ssh/my-key.pem ubuntu@3.250.60.125 
+newgrp docker
+docker ps
+sudo passwd $USER
+docker tag myapp:latest 343218194096.dkr.ecr.eu-west-1.amazonaws.com/myapp:latest
+cd myapp
+whoami
+docker tag myapp:latest 343218194096.dkr.ecr.eu-west-1.amazonaws.com/myapp:latest
+git init
+aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.eu-west-1.amazonaws.com
+aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 343218194096.dkr.ecr.eu-west-1.amazonaws.com
+docker tag myapp:latest <aws_account_id>.dkr.ecr.eu-west-1.amazonaws.com/myapp:latest
+aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 343218194096.dkr.ecr.eu-west-1.amazonaws.com
+docker tag myapp:latest 343218194096.dkr.ecr.eu-west-1.amazonaws.com/myapp:latest
+sudo systemctl status docker
+docker info
+docker tag myapp:latest 343218194096.dkr.ecr.eu-west-1.amazonaws.com/myapp:latest
+ssh -i ~/.ssh/my-key.pem ubuntu@3.250.60.125 
+ls
+git init
+git add docker.yml inventory.ini webapp.html
+git commit -m "Added files"
+git config --global user.email "jomymmaxirl@gmail.com
+
+git commit -m "Added files"
+git config --global user.email "jomymmaxirl@gmail.com
+git config --global user.name athul
+git push origin main
+git branch
+git add .
+git push -u origin main
+git commit -m "Initial commit"
+git config --global user.name Athul
+git config --global user.email jomymmaxirl@gmail.com
+git commit -m "Initial commit"
+git push -u origin main
+git checkout -b main
+git push -u origin main
+git remote add origin https://github.com/AthulMAX/samplerepo.git
+git push -u origin main
+git pull
+git pull origin main
+git push -u origin main
+git pull origin main --rebase
+git push -u origin main
+mkdir -p .github/workflows
+touch .github/workflows/ci-cd-pipeline.yml
+ls
+cd workflows
+cat ci-cd-pipeline.yml
+cat pipeline.yml
+git add .github/workflows/ci-cd-pipeline.yml
+git commit -m "Set up CI/CD pipeline for Docker"
+git push origin main
