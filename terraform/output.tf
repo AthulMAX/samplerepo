@@ -1,4 +1,1 @@
-output "public_ip" {
-  description = "Public IP of the Docker host"
-  value       = aws_instance.docker_host.public_ip
-}
+# This file should be empty or contain other outputs (not public_ip).
