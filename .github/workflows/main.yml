@@ -13,10 +13,13 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
     environment: production
+    permissions:
+      id-token: write  # Required for AWS credentials
+      contents: read
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4  # Updated to v4
 
       - name: Set up AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -41,7 +44,7 @@ jobs:
       - name: Output EC2 Instance IP
         id: terraform-output
         run: |
-          echo "vm_ip=$(terraform output -raw vm_ip)" >> $GITHUB_OUTPUT  # Set output using environment file
+          echo "vm_ip=$(terraform output -raw vm_ip)" >> $GITHUB_OUTPUT
 
       - name: Debug EC2 Instance IP
         run: echo "EC2 Instance IP: ${{ steps.terraform-output.outputs.vm_ip }}"
@@ -50,10 +53,13 @@ jobs:
   ansible:
     runs-on: ubuntu-latest
     needs: terraform  # Ensures the Terraform job runs first
+    permissions:
+      id-token: write  # Required for AWS credentials
+      contents: read
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4  # Updated to v4
 
       - name: Set up AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -64,7 +70,7 @@ jobs:
 
       - name: Read EC2 Instance IP
         run: |
-          echo "EC2 Instance IP: ${{ needs.terraform.outputs.vm_ip }}"  # Use output from Terraform job
+          echo "EC2 Instance IP: ${{ needs.terraform.outputs.vm_ip }}"
 
       - name: Install Ansible
         run: |
@@ -74,6 +80,7 @@ jobs:
           sudo apt install -y ansible
 
       - name: Set up Ansible inventory file
+        shell: bash
         run: |
           echo "[aws_servers]" > inventory.ini
           echo "${{ needs.terraform.outputs.vm_ip }} ansible_user=ubuntu ansible_ssh_private_key_file=my-key-pair.pem ansible_ssh_extra_args='-o StrictHostKeyChecking=no -o KbdInteractiveAuthentication=no -o PreferredAuthentications=publickey -o PasswordAuthentication=no'" >> inventory.ini
