@@ -35,12 +35,12 @@ resource "aws_security_group" "vm_sg" {
 
 # Data source to fetch an existing key pair from your AWS account
 data "aws_key_pair" "existing_key" {
-  key_name = "my-key-pair"  # Replace with your existing key pair name
+  key_name = "key"  # Replace with your existing key pair name
 }
 
 # EC2 Instance using the key pair and security group
 resource "aws_instance" "vm" {
-  ami           = "ami-0d64bb532e0502c46"  # Replace with your preferred AMI ID
+  ami           = "ami-03fd334507439f4d1"  # Replace with your preferred AMI ID
   instance_type = "t2.micro"
   key_name      = data.aws_key_pair.existing_key.key_name   # Reference the existing key pair
 
