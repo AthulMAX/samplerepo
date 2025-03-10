@@ -47,7 +47,7 @@ jobs:
           echo "vm_ip=$(terraform output -raw vm_ip)" >> $GITHUB_OUTPUT
 
       - name: Debug EC2 Instance IP
-        run: echo "EC2 Instance IP: ${{ steps.terraform-output.outputs.vm_ip }}"
+        run: echo "EC2 Instance IP: ${steps.terraform-output.outputs.vm_ip}"
 
   # Ansible Job
   ansible:
